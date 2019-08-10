@@ -1,10 +1,12 @@
 
 from flask import request, redirect, render_template, url_for, flash
-from flaskapp.models import User
+from flaskapp.models import User, Word
 from flaskapp import db, bcrypt, app
 from flaskapp.api import information
 from flaskapp.forms import LoginForm, RegistrationForm
+from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
+from image_gen import generate_url
 
 @app.route("/search", methods=['GET', 'POST'])
 def search():
@@ -13,8 +15,22 @@ def search():
         return redirect(url_for('search', word=output_word))
     else:
         try:
-            input_word = information(request.args.get('word'))
-            return render_template('search.html', word=input_word, name="search")
+            input_word = request.args.get('word')
+            word_meaning = information(input_word)
+            if current_user.is_authenticated:
+                looking_word = Word.query.filter_by(user_id=current_user.id, word=input_word).first()
+                if (looking_word != None):
+                    looking_word.time = datetime.utcnow()
+                    looking_word.searched += 1
+                    db.session.add(looking_word)
+                    db.session.commit()
+                else:
+                    word = Word(word=input_word, user_id=current_user.id, searched=1)
+                    db.session.add(word)
+                    db.session.commit()
+            else:
+                flash("Your words will not be saved. Login or Sign Up to save words", 'info')
+            return render_template('search.html', word=word_meaning, name="search")
         except:
             return redirect(url_for("error"))
 
@@ -79,3 +95,12 @@ def account():
         return redirect(url_for('search', word=output_word))
     else:
         return render_template('account.html', name="account", background_url="https://i.ytimg.com/vi/YC5WrEArgxY/maxresdefault.jpg")
+
+@app.route("/view")
+@login_required
+def view():
+    if request.method == 'POST':
+        output_word = request.form['search_word']
+        return redirect(url_for('search', word=output_word))
+    else:
+        return render_template('view.html', name='view', background_url="https://images.pexels.com/photos/1020317/pexels-photo-1020317.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")

@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+{% block a %}
+    {% for each in current_user.words %}
+        {{ each }}
+    {% endfor %}
+{% endblock a %}

@@ -6,7 +6,7 @@ from flaskapp.api import information
 from flaskapp.forms import LoginForm, RegistrationForm
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
-from image_gen import generate_url
+from flaskapp.imagegen import generate_url, white_screen, blue_gradient
 
 @app.route("/search", methods=['GET', 'POST'])
 def search():
@@ -30,7 +30,7 @@ def search():
                     db.session.commit()
             else:
                 flash("Your words will not be saved. Login or Sign Up to save words", 'info')
-            return render_template('search.html', word=word_meaning, name="search")
+            return render_template('search.html', word=word_meaning, name="search", background_url=generate_url())
         except:
             return redirect(url_for("error"))
 
@@ -40,7 +40,7 @@ def error():
         output_word = request.form['search_word']
         return redirect(url_for('search', word=output_word))
     else:
-        return render_template("error.html", name="error")
+        return render_template("error.html", name="error", background_url=generate_url())
     
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -56,7 +56,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash("Login Unccessful. Please check username and password", 'danger')
-    return render_template("login.html", name="login", form=form, background_url="https://webgradients.com/public/webgradients_png/019%20Malibu%20Beach.png")
+    return render_template("login.html", name="login", form=form, background_url=blue_gradient())
 
 @app.route("/")
 @app.route("/home", methods=['GET', "POST"])
@@ -65,7 +65,7 @@ def home():
         output_word = request.form['search_word']
         return redirect(url_for('search', word=output_word))
     else:
-        return render_template('home.html', name="home", background_url="https://i.ytimg.com/vi/YC5WrEArgxY/maxresdefault.jpg")
+        return render_template('home.html', name="home", background_url=white_screen())
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -94,7 +94,7 @@ def account():
         output_word = request.form['search_word']
         return redirect(url_for('search', word=output_word))
     else:
-        return render_template('account.html', name="account", background_url="https://i.ytimg.com/vi/YC5WrEArgxY/maxresdefault.jpg")
+        return render_template('account.html', name="account", background_url=white_screen())
 
 @app.route("/view")
 @login_required
@@ -103,4 +103,4 @@ def view():
         output_word = request.form['search_word']
         return redirect(url_for('search', word=output_word))
     else:
-        return render_template('view.html', name='view', background_url="https://images.pexels.com/photos/1020317/pexels-photo-1020317.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+        return render_template('view.html', name='view', background_url=generate_url())

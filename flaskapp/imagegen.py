@@ -9,3 +9,9 @@ def generate_url():
                 "https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", 
                 "https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"]
     return url_list[random.randint(1, len(url_list)-1)]
+
+def white_screen():
+    return "https://i.ytimg.com/vi/YC5WrEArgxY/maxresdefault.jpg"
+
+def blue_gradient():
+    return "https://cdn.stocksnap.io/img-thumbs/960w/QB2MMFF2XJ.jpg"

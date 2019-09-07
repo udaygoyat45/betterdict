@@ -21,11 +21,11 @@ def search():
                 looking_word = Word.query.filter_by(user_id=current_user.id, word=input_word).first()
                 if (looking_word != None):
                     looking_word.time = datetime.utcnow()
-                    looking_word.searched += 1
+                    looking_word.level = int(looking_word.level/2)
                     db.session.add(looking_word)
                     db.session.commit()
                 else:
-                    word = Word(word=input_word, user_id=current_user.id, searched=1)
+                    word = Word(word=input_word, user_id=current_user.id, level=1)
                     db.session.add(word)
                     db.session.commit()
             else:
@@ -96,7 +96,7 @@ def account():
     else:
         return render_template('account.html', name="account", background_url=white_screen())
 
-@app.route("/view")
+@app.route("/view", methods=['GET', 'POST'])
 @login_required
 def view():
     if request.method == 'POST':
@@ -104,3 +104,8 @@ def view():
         return redirect(url_for('search', word=output_word))
     else:
         return render_template('view.html', name='view', background_url=generate_url())
+
+@app.route("/practice")
+def practice():
+    return render_template('practice.html', name='practice', background_url=white_screen())
+

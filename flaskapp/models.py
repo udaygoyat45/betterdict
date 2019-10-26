@@ -20,8 +20,9 @@ class Word(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     word = db.Column(db.String(45), unique=True, nullable=False)
     time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    due_date = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     level = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return f"Word('{self.word}', '{self.time}', '{self.user_id}', '{self.level}')"
+        return f"Word('{self.word}', '{self.time}', '{self.due_date}', '{self.user_id}', '{self.level}')"

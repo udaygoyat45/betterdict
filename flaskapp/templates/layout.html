@@ -13,6 +13,8 @@
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;">
+    {% elif background_color %}
+    <body style="background-color: {{ background_color }}">
     {% else %}
     <body style="background-color: white">
     {% endif %}

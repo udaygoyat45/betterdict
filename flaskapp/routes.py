@@ -112,5 +112,10 @@ def view():
 
 @app.route("/practice")
 def practice():
-    return render_template('practice.html', name='practice', background_url=white_screen())
+    user_words = User.query.get(current_user.id).words
+    due_today = []
+    for word in user_words:
+        if (word.due_date.date() == datetime.today().date()):
+            due_today.append(word)
+    return render_template('practice.html', name='practice', background_url=white_screen(), words_due_today=due_today)
 

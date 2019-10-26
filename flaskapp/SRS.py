@@ -15,6 +15,7 @@ today
 '''
 
 from datetime import datetime, timedelta
-fibonacci_sequence = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
-def new_time(current_level, upgrade):
-    return fibonacci_sequence[current_level+upgrade]
+
+def new_time(date, current_level):
+    fibonacci_sequence = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
+    return date + timedelta(days=fibonacci_sequence[current_level-1])

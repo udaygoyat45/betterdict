@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title>BetterDict</title>
-        
+
     </head>
     {% if background_url %}
     <body style="background: url( {{ background_url }} );
@@ -49,6 +49,8 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {% if current_user.is_authenticated %}
                       <a class="dropdown-item font-weight-light" href="{{ url_for('logout') }}">Log Out</a>
+                      <a class="dropdown-item font-weight-light" href="{{ url_for('account') }}">Account</a>
+
                     {% else %}
                     <a class="dropdown-item font-weight-light" href="{{ url_for('register') }}">Sign Up</a>
                     <a class="dropdown-item font-weight-light" href="{{ url_for('login') }}">Log In</a>

@@ -21,9 +21,11 @@ def search():
             if current_user.is_authenticated:
                 looking_word = Word.query.filter_by(user_id=current_user.id, word=input_word).first()
                 if (looking_word != None):
+                    
                     looking_word.time = datetime.utcnow()
-                    looking_word.level = looking_word//2
-                    looking_word.due_date = new_time(looking_word.time, looking_word.level)
+                    looking_word.level = looking_word.level//2
+                    
+                    looking_word.due_date = new_time(datetime.utcnow(), looking_word.level)
                     db.session.add(looking_word)
                     db.session.commit()
                 else:
@@ -33,7 +35,8 @@ def search():
             else:
                 flash("Your words will not be saved. Login or Sign Up to save words", 'info')
             return render_template('search.html', word=word_meaning, name="search", background_url=generate_url())
-        except:
+        
+        except: 
             return redirect(url_for("error"))
 
 @app.route("/error", methods=["GET", "POST"])

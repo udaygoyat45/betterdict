@@ -33,7 +33,6 @@ def search():
             return render_template('search.html', word=word_meaning, name="search", background_url=generate_url())
         except:
             return redirect(url_for("error"))
-
 @app.route("/error", methods=["GET", "POST"])
 def error():
     if request.method == 'POST':
@@ -41,7 +40,6 @@ def error():
         return redirect(url_for('search', word=output_word))
     else:
         return render_template("error.html", name="error", background_url=generate_url())
-    
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -57,7 +55,6 @@ def login():
         else:
             flash("Login Unccessful. Please check username and password", 'danger')
     return render_template("login.html", name="login", form=form, background_url=blue_gradient())
-
 @app.route("/")
 @app.route("/home", methods=['GET', "POST"])
 def home():
@@ -66,7 +63,6 @@ def home():
         return redirect(url_for('search', word=output_word))
     else:
         return render_template('home.html', name="home", background_url=white_screen())
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -81,12 +77,10 @@ def register():
         flash("Your account has been created, and now you can login 👍", 'success')
         return redirect(url_for('login'))
     return render_template("register.html", name="register", form=form)
-
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
-
 @app.route("/account", methods=['GET', "POST"])
 @login_required
 def account():
@@ -95,7 +89,6 @@ def account():
         return redirect(url_for('search', word=output_word))
     else:
         return render_template('account.html', name="account", background_url=white_screen())
-
 @app.route("/view", methods=['GET', 'POST'])
 @login_required
 def view():
@@ -104,7 +97,6 @@ def view():
         return redirect(url_for('search', word=output_word))
     else:
         return render_template('view.html', name='view', background_url=generate_url())
-
 @app.route("/practice")
 def practice():
     return render_template('practice.html', name='practice', background_url=white_screen())

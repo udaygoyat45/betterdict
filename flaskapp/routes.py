@@ -118,5 +118,5 @@ def practice():
     for word in user_words:
         if (word.due_date.date() <= datetime.today().date()):
             due_today.append(word)
-    return render_template('practice.html', name='practice', background_color="rgb(52,58,64)", words_due_today=due_today)
+    return render_template('practice.html', name='practice', background_color="rgb(52,58,64)", words_due_today=due_today, js_file="practice.js")
 

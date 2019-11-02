@@ -67,10 +67,6 @@
                 </li>
                 -->
               </ul>
-              <form action="{{ url_for(name) }}" method='POST' class="form-inline my-2 my-lg-0">
-                <input name="search_word" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Search</button>
-              </form>
             </div>
           </nav>
           {% with messages = get_flashed_messages(with_categories=true) %}

@@ -2,7 +2,7 @@
 {% block a %}
 
     {% if words_due_today != [] %}
-        <h1 class="display-3 ml-2" style="color: white">Words to review today</h1>
+        <h1 class="display-3 ml-2" style="color: white">Words to due today</h1>
         <div class="card-group">
             {% set index = 0 %}
             {% for word in words_due_today %}
@@ -35,7 +35,7 @@
     {% else %}
             <div class="ml-3 " style="color: white">
                     <h1 class="display-3 ">No words today! </h1>
-                    <h1 class="display-3 ">Enjoy the rest of your day</h1>
+                    <h1 class="display-3 ">Enjoy the rest of your day 😊</h1>
             </div>
        
 

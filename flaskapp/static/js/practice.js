@@ -1,7 +1,17 @@
 var answer = {};
 
 $(document).ready(function() {
-    
+    /*$("#submit").click(function() {
+        
+        $.ajax({
+            type : 'POST',
+            url : "{{ url_for('review') }}",
+            contentType: 'application/json;charset=UTF-8',
+            data : {'data': 5}
+          });
+        
+        alert("done");
+    });*/
 });
 
 $("button").click(function() {
@@ -14,11 +24,3 @@ $("button").click(function() {
         $(("#"+name[1])).fadeOut(500);
 });
 
-$("#submit").click(function() {
-    
-    $.post( "/review", {
-        javascript_data: 5/*answer*/ 
-    });
-    
-    alert("done");
-});

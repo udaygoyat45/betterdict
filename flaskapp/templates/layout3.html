@@ -92,6 +92,24 @@
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>-->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="{{url_for('static', filename='js/practice.js') }}"></script>
+        <script>
+          $(document).ready(function() {
+            $("#submit").click(function() {
+        
+            $.ajax({
+                type : 'POST',
+                url : "{{ url_for('review') }}",
+                data : {'data': 5}
+              });
+            
+            /*$.post( "/review", {
+                javascript_data: 5/*answer
+            });*/
+
+            alert("done");
+    });
+});
+        </script>
         <script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js></script>
     </body>
 </html>

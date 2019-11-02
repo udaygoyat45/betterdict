@@ -128,6 +128,8 @@ def practice():
 @login_required
 def review():
     if (request.method == 'POST'):
-        jsdata = request.form['javascript_data']
-        print("bruh --------------")
-        return jsdata
+        jsdata = request.form['data']
+        return redirect(url_for('review', data=jsdata))
+    else:
+        inpdata = request.args.get('data')
+        return render_template("review.html")

@@ -124,3 +124,10 @@ def practice():
                 due_today.append(word)
         return render_template('practice.html', name='practice', background_color="rgb(52,58,64)", words_due_today=due_today, js_file="practice.js")
 
+@app.route("/review", methods=['GET', 'POST'])
+@login_required
+def review():
+    if (request.method == 'POST'):
+        jsdata = request.form['javascript_data']
+        print("bruh --------------")
+        return jsdata

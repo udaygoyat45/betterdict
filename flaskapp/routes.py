@@ -30,7 +30,7 @@ def search():
                     db.session.add(looking_word)
                     db.session.commit()
                 else:
-                    word = Word(word=input_word, user_id=current_user.id, due_date=new_time(datetime.utcnow(), 0), level=1)
+                    word = Word(word=input_word, user_id=current_user.id, due_date=new_time(datetime.utcnow(), 1), level=1)
                     db.session.add(word)
                     db.session.commit()
             else:
@@ -141,9 +141,9 @@ def review():
                 current_word.level = current_word.level + 1
             else:
                 words_to_review[key] = information(key)
-            current_word.due_date = current_word.due_date#change to this later: new_time(current_word.time, current_word.level)
+            current_word.due_date = new_time(current_word.time, current_word.level)
 
             db.session.add(current_word)
             db.session.commit()
 
-        return render_template("review.html", data=words_to_review, name="review")
+        return render_template("review.html", data=words_to_review, name="review", background_url=generate_url())

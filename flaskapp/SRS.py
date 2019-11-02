@@ -17,5 +17,5 @@ today
 from datetime import datetime, timedelta
 
 def new_time(date, current_level):
-    fibonacci_sequence = [0, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
-    return date + timedelta(days=fibonacci_sequence[current_level-1])
+    fibonacci_sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
+    return date + timedelta(days=fibonacci_sequence[current_level])

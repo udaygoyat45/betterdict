@@ -1,5 +1,5 @@
 
-from flask import request, redirect, render_template, url_for, flash
+from flask import request, redirect, render_template, url_for, flash, jsonify
 from flaskapp.models import User, Word
 from flaskapp import db, bcrypt, app
 from flaskapp.api import information
@@ -8,6 +8,7 @@ from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
 from flaskapp.imagegen import generate_url, white_screen, blue_gradient
 from flaskapp.SRS import new_time
+from ast import literal_eval
 
 @app.route("/search", methods=['GET', 'POST'])
 def search():
@@ -128,8 +129,21 @@ def practice():
 @login_required
 def review():
     if (request.method == 'POST'):
-        jsdata = request.form['data']
+        jsdata = request.get_json()
         return redirect(url_for('review', data=jsdata))
     else:
-        inpdata = request.args.get('data')
-        return render_template("review.html")
+        inpjsdata = literal_eval(request.args.get('data'))
+        words_to_review = {}
+        for key, value in inpjsdata.items():
+            current_word = Word.query.filter_by(user_id=current_user.id, word=key).first()
+            current_word.time = datetime.utcnow()
+            if (key == 1):
+                current_word.level = current_word.level + 1
+            else:
+                words_to_review[key] = information(key)
+            current_word.due_date = new_time(current_word.time, current_word.level)
+
+            db.session.add(current_word)
+            db.session.commit()
+
+        return render_template("review.html", data=words_to_review)

@@ -1,7 +1,7 @@
 var answer = {};
-
+/*
 $(document).ready(function() {
-    /*$("#submit").click(function() {
+    $("#submit").click(function() {
         
         $.ajax({
             type : 'POST',
@@ -11,7 +11,7 @@ $(document).ready(function() {
           });
         
         alert("done");
-    });*/
+    });
 });
 
 $("button").click(function() {
@@ -23,4 +23,4 @@ $("button").click(function() {
 
         $(("#"+name[1])).fadeOut(500);
 });
-
+*/

@@ -8,7 +8,7 @@
             {% for word in words_due_today %}
                 <div class="card m-3" id="{{ loop.index }}">
                     <div class="card-body">
-                        <h3 class="card-title">{{ word.word }}</h3>
+                        <h3 class="card-title" id="{{ 'w'+loop.index|string }}">{{ word.word }}</h3>
                         <p class="card-text"><small class="text-muted">Review or not?</small></p>
                         <button type="button" class="btn btn-light" id="{{ 'b' + loop.index|string }}">
                         <span style="color:greenyellow; font-size: 160%">
@@ -33,7 +33,11 @@
                 </button>
             </div>
     {% else %}
-        <h1 class="display-1 ">No words today! Enjoy the rest of your day</h1>
+            <div class="ml-3 " style="color: white">
+                    <h1 class="display-3 ">No words today! </h1>
+                    <h1 class="display-3 ">Enjoy the rest of your day</h1>
+            </div>
+       
 
 {% endif %}
 {% endblock a %}

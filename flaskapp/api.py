@@ -8,7 +8,7 @@ def information(word):
     return data
 '''
 
-from dictionary import Word, SubWord
+from flaskapp.dictionary import Word, SubWord
 import requests
 import json
 

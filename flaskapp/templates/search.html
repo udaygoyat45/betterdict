@@ -29,6 +29,12 @@
                              {{ each }},
                         {% endfor %}
                         </h4>
+                  {% elif (x == "examples") %}
+                        <ul class="list-group">
+                          {% for example in y: %}
+                            <li class="list-group-item">{{ example }}</li>
+                          {% endfor %}
+                        </ul>
                    {% else %}
                        <h4 class="font-weight-light"> {{ x }}: {{ y }}</h4>
                    {% endif %}

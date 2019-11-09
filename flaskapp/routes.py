@@ -2,7 +2,7 @@
 from flask import request, redirect, render_template, url_for, flash, jsonify
 from flaskapp.models import User, Word
 from flaskapp import db, bcrypt, app
-from flaskapp.api import information
+from flaskapp.api import extract
 from flaskapp.forms import LoginForm, RegistrationForm
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
@@ -18,7 +18,7 @@ def search():
     else:
         try:
             input_word = request.args.get('word')
-            word_meaning = information(input_word)
+            word_meaning = extract(input_word).compile_json()
             if current_user.is_authenticated:
                 looking_word = Word.query.filter_by(user_id=current_user.id, word=input_word).first()
                 if (looking_word != None):
@@ -140,7 +140,7 @@ def review():
             if (value == 1):
                 current_word.level = current_word.level + 1
             else:
-                words_to_review[key] = information(key)
+                words_to_review[key] = extract(key).compile_json
             current_word.due_date = new_time(current_word.time, current_word.level)
 
             db.session.add(current_word)

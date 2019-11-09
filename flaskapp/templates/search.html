@@ -22,19 +22,14 @@
                 <h3 class="font-weight-normal"> {{ key }} </h2>
                <div style="text-indent: 4%"> 
                 {% for x, y in value[0].items() %}
-                  {% if (x == "synonyms") %}
+                  {% if y is iterable and x is not string %}
                         
-                        <h4 class="font-weight-light"> synonyms: 
+                        <h4 class="font-weight-light"> {{x}}: 
                         {% for each in y %}
                              {{ each }},
                         {% endfor %}
                         </h4>
-                  {% elif (x == "examples") %}
-                        <ul class="list-group">
-                          {% for example in y: %}
-                            <li class="list-group-item">{{ example }}</li>
-                          {% endfor %}
-                        </ul>
+
                    {% else %}
                        <h4 class="font-weight-light"> {{ x }}: {{ y }}</h4>
                    {% endif %}

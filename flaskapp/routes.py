@@ -24,7 +24,7 @@ def search():
                 if (looking_word != None):
                     
                     looking_word.time = datetime.utcnow()
-                    looking_word.level = looking_word.level//2
+                    looking_word.level = 1 if looking_word.level == 1 or looking_word.level == 0 else looking_word.level//2
                     
                     looking_word.due_date = new_time(datetime.utcnow(), looking_word.level)
                     db.session.add(looking_word)

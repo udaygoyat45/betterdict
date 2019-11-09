@@ -22,16 +22,16 @@
                 <h3 class="font-weight-normal"> {{ key }} </h2>
                <div style="text-indent: 4%"> 
                 {% for x, y in value[0].items() %}
-                  {% if y is iterable and x is not string %}
-                        
+                  {% if y is iterable and y is not string and y != [None]%}
+                
                         <h4 class="font-weight-light"> {{x}}: 
                         {% for each in y %}
-                             {{ each }},
+                             {{ each }};
                         {% endfor %}
                         </h4>
-
-                   {% else %}
-                       <h4 class="font-weight-light"> {{ x }}: {{ y }}</h4>
+                  {% elif y != [None] %}
+                  <h4 class="font-weight-light"> {{ x }}: {{ y }}</h4>
+                       
                    {% endif %}
                 {% endfor %}
                 </div>

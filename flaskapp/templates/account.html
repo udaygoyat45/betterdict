@@ -1,10 +1,14 @@
 {% extends "layout2.html" %}
 {% block a %}
 
+<button class="btn btn-light" href="{{ url_for('error') }}">
+    <i class="fas fa-arrow-left"></i> Go Back
+</button>
+
 <form class="" method="POST" action="">
     {{ form.hidden_tag() }}
 
-    {{ form.username.label(for="inputUsername") }}
+    {{ form.username.label(id="inputUsername", class="ml-3 mt-3") }}
 
     {% if form.username.errors %}
     {{ form.username(id="inputUsername", class="form-control is-invalid") }}
@@ -15,37 +19,38 @@
     </div>
 
     {% else %}
-    {{ form.username(id="inputUsername", class="form-control") }}
+    {{ form.username(id="inputUsername", class="form-control ml-3", value=user.username) }}
     {% endif %}
 
+    {{ form.email.label(for="inputEmail", class="ml-3 mt-3") }}
 
-
-    {{ form.password.label(for="inputEmail") }}
     {% if form.email.errors %}
-    {{ form.email(id="inputEmail", class="form-control is-invalid") }}
+    {{ form.email(id="inputUsername", class="form-control is-invalid ml-3") }}
     <div class="invalid-feedback">
         {% for error in form.email.errors %}
         <span>{{ error }}</span>
         {% endfor %}
     </div>
     {% else %}
-    {{ form.email(id="inputEmail", class="form-control") }}
+    {{ form.email(id="inputUsername", class="form-control ml-3", value=user.email) }}
     {% endif %}
 
-
-
-    {{ form.password.label(for="inputPassword") }}
+    {{ form.password.label(for="inputPassword", class="ml-3 mt-3") }}
 
     {% if form.password.errors %}
-    {{ form.password(id="inputPassword", class="form-control is-invalid") }}
+    {{ form.password(id="inputPassword", class="form-control is-invalid ml-3") }}
     <div class="invalid-feedback">
         {% for error in form.password.errors %}
         <span>{{ error }}</span>
         {% endfor %}
     </div>
     {% else %}
-    {{ form.password(id="inputPassword", class="form-control") }}
+    {{ form.password(id="inputPassword", class="form-control ml-3") }}
 
+    {{ form.submit(class="btn btn-info ml-3 mt-2") }}
 </form>
+
+<a class="d-block mt-2 ml-3 small" href="#">Forgot Password?</a>
+
 {% endif %}
 {% endblock a %}

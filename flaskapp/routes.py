@@ -110,8 +110,9 @@ def logout():
 @login_required
 def account():
     form = AccountForm()
+    user = current_user
     if form.validate_on_submit():
-        user = current_user
+        
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             if (form.username.data != ""):
                 user.username = form.username.data
@@ -120,28 +121,11 @@ def account():
 
             db.session.add(user)
             db.session.commit()
-            flash("Change Successful")
+            flash("Change Successful", 'success')
             return redirect(url_for('home'))
         else:
             flash("Change Unccessful. Please check password", 'danger')
-    return render_template("login.html", name="login", form=form, background_url=blue_gradient())
-    '''form = AccountForm()
-    if form.validate_on_submit():
-        user = current_user
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            if (form.username.data != ""):
-                user.username = form.username.data
-            if (form.email.data != ""):
-                user.email = form.email.data
-
-            db.session.add(user)
-            db.session.commit()
-            flash("Change Successful")
-            return redirect(url_for('home'))
-        else:
-            flash("Change Unccessful. Please check password", 'danger')
-    return render_template("login.html", name="login", form=form, background_url=blue_gradient())'''
-    return render_template("account.html", name="account", form=form)
+    return render_template("account.html", name="login", form=form, background_url="rgb(255, 255, 255)", user=user)
 
 
 @app.route("/view", methods=['GET', 'POST'])

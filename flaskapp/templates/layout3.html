@@ -100,10 +100,11 @@
         var answer = {}
 
         $(document).ready(function () {
-
+          $("#wait").hide();
 
           $("#submit").click(function () {
-
+            $("#submit").hide();
+            $("#wait").show();
             $.ajax({
               type: 'POST',
               url: "{{ url_for('review') }}",
@@ -111,14 +112,10 @@
               contentType: "application/json",
               success: function (response) { document.write(response); }
             });
-
-            /*$.post( "/review", {
-              javascript_data: 5/*answer
-            });*/
           });
 
           $("button").click(function () {
-            $("button").hide();
+
             var name = (this.id).split("");
             if (name[1] != 'u') {
               var word = $(("#w" + name[1])).text();

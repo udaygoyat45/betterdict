@@ -34,7 +34,7 @@ def search():
                     db.session.commit()
                 else:
                     word = Word(word=input_word, user_id=current_user.id,
-                                due_date=new_time(datetime.utcnow(), 1), level=1)
+                                due_date=new_time(datetime.utcnow(), 0), level=0) #!!!!!remember to change level to 1
                     db.session.add(word)
                     db.session.commit()
             else:

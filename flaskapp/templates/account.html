@@ -1,4 +1,51 @@
-{% extends "layout.html" %}
+{% extends "layout2.html" %}
 {% block a %}
 
+<form class="" method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    {{ form.username.label(for="inputUsername") }}
+
+    {% if form.username.errors %}
+    {{ form.username(id="inputUsername", class="form-control is-invalid") }}
+    <div class="invalid-feedback">
+        {% for error in form.username.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    {{ form.username(id="inputUsername", class="form-control") }}
+    {% endif %}
+
+
+
+    {{ form.password.label(for="inputEmail") }}
+    {% if form.email.errors %}
+    {{ form.email(id="inputEmail", class="form-control is-invalid") }}
+    <div class="invalid-feedback">
+        {% for error in form.email.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    {{ form.email(id="inputEmail", class="form-control") }}
+    {% endif %}
+
+
+
+    {{ form.password.label(for="inputPassword") }}
+
+    {% if form.password.errors %}
+    {{ form.password(id="inputPassword", class="form-control is-invalid") }}
+    <div class="invalid-feedback">
+        {% for error in form.password.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    {{ form.password(id="inputPassword", class="form-control") }}
+
+</form>
+{% endif %}
 {% endblock a %}

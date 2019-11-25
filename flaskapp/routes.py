@@ -3,7 +3,7 @@ from flask import request, redirect, render_template, url_for, flash, jsonify
 from flaskapp.models import User, Word
 from flaskapp import db, bcrypt, app
 from flaskapp.api import extract
-from flaskapp.forms import LoginForm, RegistrationForm
+from flaskapp.forms import LoginForm, RegistrationForm, AccountForm
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
 from flaskapp.imagegen import generate_url, white_screen, blue_gradient
@@ -34,7 +34,7 @@ def search():
                     db.session.commit()
                 else:
                     word = Word(word=input_word, user_id=current_user.id,
-                                due_date=new_time(datetime.utcnow(), 0), level=0) #!!!!!remember to change level to 1
+                                due_date=new_time(datetime.utcnow(), 1), level=1)
                     db.session.add(word)
                     db.session.commit()
             else:
@@ -109,11 +109,39 @@ def logout():
 @app.route("/account", methods=['GET', "POST"])
 @login_required
 def account():
-    if request.method == 'POST':
-        output_word = request.form['search_word']
-        return redirect(url_for('search', word=output_word))
-    else:
-        return render_template('account.html', name="account", background_url=white_screen())
+    form = AccountForm()
+    if form.validate_on_submit():
+        user = current_user
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            if (form.username.data != ""):
+                user.username = form.username.data
+            if (form.email.data != ""):
+                user.email = form.email.data
+
+            db.session.add(user)
+            db.session.commit()
+            flash("Change Successful")
+            return redirect(url_for('home'))
+        else:
+            flash("Change Unccessful. Please check password", 'danger')
+    return render_template("login.html", name="login", form=form, background_url=blue_gradient())
+    '''form = AccountForm()
+    if form.validate_on_submit():
+        user = current_user
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            if (form.username.data != ""):
+                user.username = form.username.data
+            if (form.email.data != ""):
+                user.email = form.email.data
+
+            db.session.add(user)
+            db.session.commit()
+            flash("Change Successful")
+            return redirect(url_for('home'))
+        else:
+            flash("Change Unccessful. Please check password", 'danger')
+    return render_template("login.html", name="login", form=form, background_url=blue_gradient())'''
+    return render_template("account.html", name="account", form=form)
 
 
 @app.route("/view", methods=['GET', 'POST'])

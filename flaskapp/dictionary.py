@@ -1,15 +1,15 @@
-#brings straight to the website and has a search bar on chrome
+# brings straight to the website and has a search bar on chrome
 class Word:
-    def __init__ (self, word, origin, subWords):
+    def __init__(self, word, origin, subWords):
         self.word = word
         self.origin = origin
         self.subWords = subWords
         self.pronunciation = self.subWords[0].pronunciation
-    
+
     def compile_json(self):
         for each in self.subWords:
             each.clean_examples()
-        
+
         data = {}
         data["word"] = self.word
         data["phonetic"] = self.pronunciation
@@ -27,7 +27,7 @@ class Word:
             data["meaning"][sword.partOfSpeech] = current
         return data
 
-    
+
 class SubWord:
     def __init__(self, partOfSpeech, definitions, examples, pronunciation):
         self.partOfSpeech = partOfSpeech

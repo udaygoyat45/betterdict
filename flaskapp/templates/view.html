@@ -12,15 +12,14 @@
 </div>
 {% else %}
 <div class="card-group">
-  {% for each in current_user.words %}
+  {% for each in words %}
   <div class="">
     <div class="card m-3">
       <div class="card-body">
         <h3 class="card-title">{{ each.word }}</h3>
         <p class="card-text"><small class="text-muted">Your progress:</small></p>
         <div class="progress" style="height: 3px;">
-          <div class="progress-bar" role="progressbar" style="width: {{ (each.level/13) * 100}} %;"
-            aria-valuenow="{{ each.level }}" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar" role="progressbar" style="width: {{ each.level/13 * 100 }}%;"></div>
         </div>
       </div>
     </div>

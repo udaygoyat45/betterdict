@@ -135,7 +135,7 @@ def view():
         output_word = request.form['search_word']
         return redirect(url_for('search', word=output_word))
     else:
-        return render_template('view.html', name='view', background_url=generate_url())
+        return render_template('view.html', name='view', words=current_user.words, background_url=generate_url())
 
 
 @app.route("/practice")

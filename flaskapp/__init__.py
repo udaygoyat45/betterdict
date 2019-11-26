@@ -15,7 +15,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
-app.config.from_pyfile('mail_configuration.cgf')
+app.config.from_pyfile('static/config/mail_configuration.cfg')
 
 mail = Mail(app)
 

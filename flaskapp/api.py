@@ -1,4 +1,4 @@
-#old classic:
+# old classic:
 '''
 def information(word):
     import urllib.request, json
@@ -12,30 +12,33 @@ from flaskapp.dictionary import Word, SubWord
 import requests
 import json
 
+
 def information(word):
     app_id = "9980cb73"
     app_key = "06d577adc31a2f72d9f75fcee6f6c77b"
     language = "en-gb"
     word_id = word
-    url = "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + word_id.lower()
+    url = "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + \
+        language + "/" + word_id.lower()
     r = requests.get(url, headers={"app_id": app_id, "app_key": app_key})
     return r.json()
 
+
 def extract(word_id):
-    #getting data:
+    # getting data:
     data = information(word_id)
 
-    #declarations:
+    # declarations:
     subwords = []
     origin = ""
 
-    #processing:
+    # processing:
     main = data["results"][0]["lexicalEntries"]
 
     for each in main:
         part_of_speech = each["lexicalCategory"]["id"]
         pronunciation = each["pronunciations"][0]["phoneticSpelling"]
-        if ("etymologies" in each["entries"][0].keys()): 
+        if ("etymologies" in each["entries"][0].keys()):
             origin = each["entries"][0]["etymologies"][0]
 
         definitions = []
@@ -46,6 +49,7 @@ def extract(word_id):
                 examples.append(definition["examples"])
             except:
                 examples.append([None])
-    
-        subwords.append(SubWord(part_of_speech, definitions, examples, pronunciation))
+
+        subwords.append(
+            SubWord(part_of_speech, definitions, examples, pronunciation))
     return Word(word_id, origin, subwords)

@@ -169,10 +169,10 @@ def review():
             if (value == 1):
                 current_word.level = current_word.level + 1
             else:
-                words_to_review[key] = extract(key).compile_json
+                words_to_review[key] = extract(key).compile_json()
+
             current_word.due_date = new_time(
                 current_word.time, current_word.level)
-
             db.session.add(current_word)
             db.session.commit()
 

@@ -3,13 +3,13 @@
 
 {% if words_due_today != [] %}
 <h1 class="display-3 ml-2" style="color: white">Words to due today</h1>
-<div class="card-group">
+<div class="card-columns mr-5">
     {% set index = 0 %}
     {% for word in words_due_today %}
     <div class="card m-3" id="{{ loop.index }}">
         <div class="card-body">
             <h3 class="card-title" id="{{ 'w'+loop.index|string }}">{{ word.word }}</h3>
-            <p class="card-text"><small class="text-muted">Review or not?</small></p>
+            <p class="card-text"><small class="text-muted">Do you remember this word's meaning?</small></p>
             <button type="button" class="btn btn-light" id="{{ 'b' + loop.index|string }}">
                 <span style="color:greenyellow; font-size: 160%">
                     <i class="fas fa-check"></i>

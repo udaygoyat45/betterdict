@@ -70,10 +70,11 @@ def extract(word_id):
                 "crossReferenceMarkers"
             ][0]
         )
-        return Link(word_id,
+        return Link(
+            word_id,
             data["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0][
                 "crossReferenceMarkers"
-            ][0]
+            ][0],
         )
 
     return Word(word_id, origin, subwords)

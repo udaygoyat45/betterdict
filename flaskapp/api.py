@@ -20,6 +20,7 @@ def information(word):
     word_id = word
     url = "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + \
         language + "/" + word_id.lower()
+    
     r = requests.get(url, headers={"app_id": app_id, "app_key": app_key})
     return r.json()
 
@@ -35,6 +36,7 @@ def extract(word_id):
     # processing:
     main = data["results"][0]["lexicalEntries"]
 
+
     for each in main:
         part_of_speech = each["lexicalCategory"]["id"]
         pronunciation = each["pronunciations"][0]["phoneticSpelling"]
@@ -49,6 +51,9 @@ def extract(word_id):
                 examples.append(definition["examples"])
             except:
                 examples.append([None])
+        
+        if definitions == []:
+            definitions.append(each["entries"][0]["senses"][0]["crossReferenceMarkers"])
 
         subwords.append(
             SubWord(part_of_speech, definitions, examples, pronunciation))

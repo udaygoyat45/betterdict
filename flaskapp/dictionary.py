@@ -5,6 +5,9 @@ class Word:
         self.origin = origin
         self.subWords = subWords
         self.pronunciation = self.subWords[0].pronunciation
+    
+    def identifier(self):   
+        return "wordClass"
 
     def compile_json(self):
         for each in self.subWords:
@@ -15,7 +18,7 @@ class Word:
         data["phonetic"] = self.pronunciation
         data["origin"] = self.origin
         data["meaning"] = {}
-
+        
         for sword in self.subWords:
             current = []
             for z in range(len(sword.definitions)):
@@ -46,3 +49,16 @@ class SubWord:
                     temp.append(None)
             new_examples.append(temp)
         self.examples = new_examples
+
+    def identifier(self):
+        return "subWordClass"
+
+class Link:
+    def __init__(self, word):
+        self.link = word
+    
+    def to_string(self):
+        return self.link
+
+    def identifier(self):
+        return "linkClass"

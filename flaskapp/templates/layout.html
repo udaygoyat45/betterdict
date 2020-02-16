@@ -74,7 +74,7 @@
                 -->
           </ul>
           <form action="{{ url_for(name) }}" method='POST' class="form-inline my-2 my-lg-0">
-            <input name="search_word" class="form-control mr-sm-2" type="search" placeholder="Search"
+            <input name="search_word" class="form-control mr-sm-2" type="search" placeholder="Search" id="words"
               aria-label="Search">
             <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
           </form>
@@ -94,5 +94,16 @@
       {% endblock a %}
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
-      <script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js> </script> </body>
+      <script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js> </script> 
+      <script>
+        $(document).ready(function() {    
+          var aTags = ["hello", "bye"];      
+          $( "#words" ).autocomplete({
+              source: aTags
+          });
+          
+          });
+      </script>
+    </body>
+
         </html>

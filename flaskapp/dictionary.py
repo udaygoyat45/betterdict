@@ -54,11 +54,15 @@ class SubWord:
         return "subWordClass"
 
 class Link:
-    def __init__(self, word):
-        self.link = word
+    def __init__(self, word, definition):
+        self.word = word
+        self.definition = definition
     
-    def to_string(self):
-        return self.link
+    def getWord(self):
+        return self.word
+
+    def getDef(self):
+        return self.definition
 
     def identifier(self):
         return "linkClass"

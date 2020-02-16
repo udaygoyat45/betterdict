@@ -14,13 +14,20 @@ from flask_mail import Message
 
 @app.route("/search", methods=['GET', 'POST'])
 def search():
+    
     if request.method == 'POST':
         output_word = request.form['search_word']
         return redirect(url_for('search', word=output_word))
     else:
+        link = False
         try:
             input_word = request.args.get('word')
-            word_meaning = extract(input_word).compile_json()
+            word_meaning = extract(input_word)
+            if word_meaning.identifier() == "linkClass":
+                print("this is so sad")
+                link = True
+            else:
+                word_meaning = word_meaning.compile_json()
             if current_user.is_authenticated:
                 looking_word = Word.query.filter_by(
                     user_id=current_user.id, word=input_word).first()
@@ -41,7 +48,7 @@ def search():
             else:
                 flash(
                     "Your words will not be saved. Login or Sign Up to save words", 'info')
-            return render_template('search.html', word=word_meaning, name="search", background_url=generate_url())
+            return render_template('search.html', word=word_meaning, link=link, name="search", background_url=generate_url())
 
         except:
             return redirect(url_for("error"))

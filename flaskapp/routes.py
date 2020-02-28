@@ -113,7 +113,7 @@ def account():
     form = AccountForm()
     user = current_user
     if form.validate_on_submit():
-        
+
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             if (form.username.data != ""):
                 user.username = form.username.data
@@ -183,7 +183,7 @@ def send_reset_email(user):
     print(token) #omg change this later
     print(user.email)
     msg = Message('Password Reset Request', recipients=[user.email])
-    msg.body = f'''To reset your password, click on this link: 
+    msg.body = f'''To reset your password, click on this link:
     {url_for('reset_token', token=token, _external=True)}
 
     If you did not make this request, don't worry you are safe 😁'''

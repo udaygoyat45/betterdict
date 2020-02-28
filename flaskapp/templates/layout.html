@@ -67,11 +67,6 @@
 
               </div>
             </li>
-            <!--
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-                -->
           </ul>
           <form action="{{ url_for(name) }}" method='POST' class="form-inline my-2 my-lg-0">
             <input name="search_word" class="form-control mr-sm-2" type="search" placeholder="Search" id="words"
@@ -96,13 +91,14 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
       <script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js> </script>
       <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
           var aTags = ["hello", "bye"];
-          $( "#words" ).autocomplete({
-              source: aTags
+          $("#words").autocomplete({
+            source: aTags
           });
 
-          });
+        });
       </script>
     </body>
-        </html>
+
+</html>

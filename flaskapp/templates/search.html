@@ -13,31 +13,42 @@
         </div>
       </div>
       -->
+  {% if link == True %}
   <div class="card border-0 shadow my-5">
     <div class="card-body p-5" style="line-height: 110%">
       <h1 class="font-weight-normal">{{ word.word }}</h1>
-      <p class="lead" style="text-indent: 1%"> {{ word.phonetic }} </p>
-      <p class="text-muted lead" style="text-indent: 3%"> {{ word.origin }}</p>
-      {% for key, value in word.meaning.items() %}
-      <h3 class="font-weight-normal"> {{ key }} </h2>
-        <div style="text-indent: 4%">
-          {% for x, y in value[0].items() %}
-          {% if y is iterable and y is not string and y != [None]%}
-
-          <h4 class="font-weight-light"> {{x}}:
-            {% for each in y %}
-            {{ each }};
-            {% endfor %}
-          </h4>
-          {% elif y != [None] %}
-          <h4 class="font-weight-light"> {{ x }}: {{ y }}</h4>
-
-          {% endif %}
-          {% endfor %}
-        </div>
-        {% endfor %}
+      <h4 class="font-weight-light">{{ word.definition }}</h4>
     </div>
   </div>
 </div>
+{% else %}
+<div class="card border-0 shadow my-5">
+  <div class="card-body p-5" style="line-height: 110%">
+    <h1 class="font-weight-normal">{{ word.word }}</h1>
+    <p class="lead" style="text-indent: 1%"> {{ word.phonetic }} </p>
+    <p class="text-muted lead" style="text-indent: 3%"> {{ word.origin }}</p>
+    {% for key, value in word.meaning.items() %}
+    <h3 class="font-weight-normal"> {{ key }} </h2>
+      <div style="text-indent: 4%">
+        {% for x, y in value[0].items() %}
+        {% if y is iterable and y is not string and y != [None]%}
+
+        <h4 class="font-weight-light"> {{x}}:
+          {% for each in y %}
+          {{ each }};
+          {% endfor %}
+        </h4>
+        {% elif y != [None] %}
+        <h4 class="font-weight-light"> {{ x }}: {{ y }}</h4>
+
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+  </div>
+</div>
+</div>
+{% endif %}
+
 
 {% endblock a %}

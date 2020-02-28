@@ -10,8 +10,18 @@
   <div class="container h-100">
     <div class="row h-100 align-items-center">
       <div class="col-12 text-center">
+        {% if possible_words %}
+        <h1 class="text-white font-weight-light">There was an error processing your word.</h1>
+        <p class="text-white lead">Did you mean?</p>
+          <ul class="list-group">
+            {% for word in possible_words %} 
+              <li style="list-style-type: none" class="text-white"><a href="{{url_for('search', word=word)}}">{{ word }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
         <h1 class="text-white font-weight-light">There was an error while processing your word. Please enter a single
-          valid English word</p>
+          valid English word</h1>
+        {% endif %}
       </div>
     </div>
   </div>

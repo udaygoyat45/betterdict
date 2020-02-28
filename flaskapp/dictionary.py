@@ -6,6 +6,9 @@ class Word:
         self.subWords = subWords
         self.pronunciation = self.subWords[0].pronunciation
 
+    def identifier(self):
+        return "wordClass"
+
     def compile_json(self):
         for each in self.subWords:
             each.clean_examples()
@@ -40,9 +43,27 @@ class SubWord:
         for each in self.examples:
             temp = []
             for each2 in each:
-                if (each2 != None):
+                if each2 != None:
                     temp.append(each2["text"])
                 else:
                     temp.append(None)
             new_examples.append(temp)
         self.examples = new_examples
+
+    def identifier(self):
+        return "subWordClass"
+
+
+class Link:
+    def __init__(self, word, definition):
+        self.word = word
+        self.definition = definition
+
+    def getWord(self):
+        return self.word
+
+    def getDef(self):
+        return self.definition
+
+    def identifier(self):
+        return "linkClass"

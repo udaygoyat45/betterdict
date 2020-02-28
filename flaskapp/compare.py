@@ -1,5 +1,8 @@
+import os
+
 all_words = []
-fin = open("flaskapp/static/words/corncob_lowercase.txt")
+basepath = os.path.abspath(".")
+fin = open(basepath + "/betterdict/flaskapp/static/words/corncob_lowercase.txt")
 all_words = fin.readlines()
 all_words = list(map(lambda x: x.strip(), all_words))
 

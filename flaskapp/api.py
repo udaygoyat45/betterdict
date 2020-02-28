@@ -1,12 +1,5 @@
 # old classic:
-"""
-def information(word):
-    import urllib.request, json
-    base_url = r"https://googledictionaryapi.eu-gb.mybluemix.net/?define="
-    json_url = urllib.request.urlopen((base_url+word))
-    data = json.loads(json_url.read())[0]
-    return data
-"""
+
 
 from flaskapp.dictionary import Word, SubWord, Link
 import requests
@@ -78,3 +71,25 @@ def extract(word_id):
         )
 
     return Word(word_id, origin, subwords)
+
+def debug_information(word):
+    app_id = "9980cb73"
+    app_key = "06d577adc31a2f72d9f75fcee6f6c77b"
+    language = "en-gb"
+    word_id = word
+    url = (
+        "https://od-api.oxforddictionaries.com:443/api/v2/entries/"
+        + language
+        + "/"
+        + word_id.lower()
+    )
+
+    r = requests.get(url, headers={"a0pp_id": app_id, "app_key": app_key})
+    return r.text
+
+def information_2(word):
+    import urllib.request, json
+    base_url = r"https://googledictionaryapi.eu-gb.mybluemix.net/?define="
+    json_url = urllib.request.urlopen((base_url+word))
+    data = json.loads(json_url.read())[0]
+    return data

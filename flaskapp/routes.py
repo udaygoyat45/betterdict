@@ -15,6 +15,7 @@ from flaskapp.imagegen import generate_url, white_screen, blue_gradient
 from flaskapp.SRS import new_time
 from ast import literal_eval
 from flask_mail import Message
+from flaskapp.compare import possibilties
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -74,7 +75,7 @@ def search():
             )
 
         except:
-            return redirect(url_for("error"))
+            return redirect(url_for("error", word=input_word))
 
 
 @app.route("/error", methods=["GET", "POST"])
@@ -83,8 +84,9 @@ def error():
         output_word = request.form["search_word"]
         return redirect(url_for("search", word=output_word))
     else:
+        input_word = request.args.get("word")
         return render_template(
-            "error.html", name="error", background_url=generate_url()
+            "error.html", name="error", background_url=generate_url(), possible_words=possibilties(input_word)
         )
 
 
